@@ -1,5 +1,5 @@
 #!/bin/bash
-
+export BUILDPLATFORM=${BUILDPLATFORM:-linux/amd64}
 image_name="open-webui"
 container_name="open-webui"
 host_port=3000
