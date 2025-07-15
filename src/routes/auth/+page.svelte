@@ -174,13 +174,13 @@
 
 <div class="min-h-screen w-full relative overflow-hidden">
 	<!-- Background avec gradient moderne -->
-	<div class="fixed inset-0 bg-gradient-to-br from-gray-50 via-yellow-50 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-black"></div>
+	<div class="fixed inset-0 bg-gradient-to-br from-gray-50 via-amber-50 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-black"></div>
 	
 	<!-- Éléments décoratifs animés avec couleurs jaune/noir -->
 	<div class="fixed inset-0 overflow-hidden pointer-events-none">
-		<div class="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-yellow-400/15 to-yellow-600/20 rounded-full blur-3xl animate-pulse"></div>
-		<div class="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-yellow-300/10 to-yellow-500/15 rounded-full blur-3xl animate-pulse" style="animation-delay: -2s"></div>
-		<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-yellow-200/8 to-yellow-400/12 rounded-full blur-3xl animate-pulse" style="animation-delay: -4s"></div>
+		<div class="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-amber-400 to-amber-600 opacity-10 rounded-full blur-3xl animate-pulse"></div>
+		<div class="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-amber-300 to-amber-500 opacity-10 rounded-full blur-3xl animate-pulse" style="animation-delay: -2s"></div>
+		<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-amber-200 to-amber-400 opacity-10 rounded-full blur-3xl animate-pulse" style="animation-delay: -4s"></div>
 	</div>
 
 	<!-- Drag region pour desktop -->
@@ -190,8 +190,8 @@
 		<!-- Header avec logo -->
 		<div class="fixed top-6 left-6 z-50 flex items-center space-x-3">
 			<div class="relative">
-				<div class="absolute inset-0 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-xl blur-sm opacity-75"></div>
-				<div class="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-xl p-2.5 shadow-lg">
+				<div class="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-600 rounded-xl blur-sm opacity-75"></div>
+				<div class="relative bg-white dark:bg-gray-800 backdrop-blur-sm rounded-xl p-2.5 shadow-lg">
 					<img
 						id="logo"
 						crossorigin="anonymous"
@@ -214,8 +214,8 @@
 					<!-- État de chargement -->
 					<div class="text-center py-16">
 						<div class="relative inline-block">
-							<div class="absolute inset-0 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-2xl blur-xl opacity-30"></div>
-							<div class="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl p-8 shadow-2xl">
+							<div class="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-600 rounded-2xl blur-xl opacity-30"></div>
+							<div class="relative bg-white dark:bg-gray-800 backdrop-blur-xl rounded-2xl p-8 shadow-2xl">
 								<div class="flex items-center justify-center space-x-4">
 									<div class="text-xl font-semibold text-gray-800 dark:text-gray-200">
 										{$i18n.t('Signing in to your {{WEBUI_NAME}}', { WEBUI_NAME: $WEBUI_NAME })}
@@ -229,10 +229,10 @@
 					<!-- Formulaire de connexion -->
 					<div class="relative">
 						<!-- Glow effect jaune -->
-						<div class="absolute inset-0 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-3xl blur-xl opacity-20"></div>
+						<div class="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-600 rounded-3xl blur-xl opacity-20"></div>
 						
 						<!-- Carte principale -->
-						<div class="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 dark:border-gray-700/50">
+						<div class="relative bg-white dark:bg-gray-800 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white dark:border-gray-700">
 							<form
 								class="space-y-6"
 								on:submit={(e) => {
@@ -257,8 +257,8 @@
 									</div>
 
 									{#if $config?.onboarding ?? false}
-										<p class="text-sm text-gray-600 dark:text-gray-400 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800/50 rounded-xl p-3 inline-flex items-center space-x-2">
-											<svg class="w-4 h-4 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<p class="text-sm text-gray-600 dark:text-gray-400 bg-amber-50 dark:bg-gray-700 border border-amber-200 dark:border-gray-600 rounded-xl p-3 inline-flex items-center space-x-2">
+											<svg class="w-4 h-4 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
 											</svg>
 											<span>{$WEBUI_NAME} {$i18n.t('does not make any external connections, and your data stays securely on your locally hosted server.')}</span>
@@ -278,7 +278,7 @@
 														bind:value={name}
 														type="text"
 														id="name"
-														class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none transition-all duration-200 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
+														class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all duration-200 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
 														autocomplete="name"
 														placeholder={$i18n.t('Enter Your Full Name')}
 														required
@@ -297,7 +297,7 @@
 														bind:value={ldapUsername}
 														type="text"
 														id="username"
-														class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none transition-all duration-200 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
+														class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all duration-200 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
 														autocomplete="username"
 														name="username"
 														placeholder={$i18n.t('Enter Your Username')}
@@ -315,7 +315,7 @@
 														bind:value={email}
 														type="email"
 														id="email"
-														class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none transition-all duration-200 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
+														class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all duration-200 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
 														autocomplete="email"
 														name="email"
 														placeholder={$i18n.t('Enter Your Email')}
@@ -334,7 +334,7 @@
 													bind:value={password}
 													type="password"
 													id="password"
-													class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none transition-all duration-200 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
+													class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all duration-200 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
 													placeholder={$i18n.t('Enter Your Password')}
 													autocomplete="current-password"
 													name="current-password"
@@ -350,7 +350,7 @@
 											<button
 												type="submit"
 												disabled={isSubmitting}
-												class="group relative w-full flex items-center justify-center px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-semibold rounded-xl transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg"
+												class="group relative w-full flex items-center justify-center px-6 py-3 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-black font-semibold rounded-xl transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg"
 											>
 												{#if isSubmitting}
 													<Spinner />
@@ -362,7 +362,7 @@
 											<button
 												type="submit"
 												disabled={isSubmitting}
-												class="group relative w-full flex items-center justify-center px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-semibold rounded-xl transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg"
+												class="group relative w-full flex items-center justify-center px-6 py-3 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-black font-semibold rounded-xl transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg"
 											>
 												{#if isSubmitting}
 													<Spinner />
@@ -383,7 +383,7 @@
 															: $i18n.t('Already have an account?')}
 														<button
 															type="button"
-															class="font-medium text-yellow-600 hover:text-yellow-500 dark:text-yellow-400 dark:hover:text-yellow-300 transition-colors duration-200"
+															class="font-medium text-amber-600 hover:text-amber-500 dark:text-amber-400 dark:hover:text-amber-300 transition-colors duration-200"
 															on:click={() => {
 																mode = mode === 'signin' ? 'signup' : 'signin';
 															}}
@@ -414,7 +414,7 @@
 										{#if $config?.oauth?.providers?.google}
 											<button
 												type="button"
-												class="w-full flex items-center justify-center px-4 py-3 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600 rounded-xl transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 shadow-sm"
+												class="w-full flex items-center justify-center px-4 py-3 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600 rounded-xl transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 shadow-sm"
 												on:click={() => {
 													window.location.href = `${WEBUI_BASE_URL}/oauth/google/login`;
 												}}
@@ -435,7 +435,7 @@
 										{#if $config?.oauth?.providers?.microsoft}
 											<button
 												type="button"
-												class="w-full flex items-center justify-center px-4 py-3 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600 rounded-xl transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 shadow-sm"
+												class="w-full flex items-center justify-center px-4 py-3 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600 rounded-xl transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 shadow-sm"
 												on:click={() => {
 													window.location.href = `${WEBUI_BASE_URL}/oauth/microsoft/login`;
 												}}
@@ -455,7 +455,7 @@
 										{#if $config?.oauth?.providers?.github}
 											<button
 												type="button"
-												class="w-full flex items-center justify-center px-4 py-3 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600 rounded-xl transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 shadow-sm"
+												class="w-full flex items-center justify-center px-4 py-3 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600 rounded-xl transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 shadow-sm"
 												on:click={() => {
 													window.location.href = `${WEBUI_BASE_URL}/oauth/github/login`;
 												}}
@@ -472,7 +472,7 @@
 										{#if $config?.oauth?.providers?.oidc}
 											<button
 												type="button"
-												class="w-full flex items-center justify-center px-4 py-3 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600 rounded-xl transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 shadow-sm"
+												class="w-full flex items-center justify-center px-4 py-3 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600 rounded-xl transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 shadow-sm"
 												on:click={() => {
 													window.location.href = `${WEBUI_BASE_URL}/oauth/oidc/login`;
 												}}
@@ -493,7 +493,7 @@
 									<div class="text-center">
 										<button
 											type="button"
-											class="text-sm text-yellow-600 hover:text-yellow-500 dark:text-yellow-400 dark:hover:text-yellow-300 transition-colors duration-200 underline"
+											class="text-sm text-amber-600 hover:text-amber-500 dark:text-amber-400 dark:hover:text-amber-300 transition-colors duration-200 underline"
 											on:click={() => {
 												if (mode === 'ldap') {
 													mode = ($config?.onboarding ?? false) ? 'signup' : 'signin';
@@ -521,11 +521,12 @@
 	}
 
 	.group:hover input {
-		@apply border-yellow-300 dark:border-yellow-500;
+		border-color: rgb(217 119 6); /* amber-600 */
 	}
 
 	input:focus {
-		@apply ring-2 ring-yellow-500 border-transparent;
+		ring-color: rgb(245 158 11); /* amber-500 */
+		border-color: transparent;
 	}
 
 	@keyframes float {
