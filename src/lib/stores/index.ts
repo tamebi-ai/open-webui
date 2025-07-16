@@ -28,7 +28,7 @@ export const USAGE_POOL: Writable<null | string[]> = writable(null);
 export const theme = writable('system');
 
 export const shortCodesToEmojis = writable(
-	Object.entries(emojiShortCodes).reduce((acc, [key, value]) => {
+	Object.entries(emojiShortCodes).reduce((acc: Record<string, string>, [key, value]) => {
 		if (typeof value === 'string') {
 			acc[value] = key;
 		} else {
@@ -62,7 +62,81 @@ export const toolServers = writable([]);
 
 export const banners: Writable<Banner[]> = writable([]);
 
-export const settings: Writable<Settings> = writable({});
+// Valeurs par défaut pour tous les utilisateurs (masquées dans l'interface)
+const defaultSettings: Settings = {
+	// Paramètres d'interface
+	highContrastMode: true,
+	landingPageMode: 'chat',
+	chatBubble: true,
+	chatDirection: 'auto',
+	widescreenMode: false,
+	splitLargeChunks: false,
+	scrollOnBranchChange: true,
+	showUsername: false,
+	notificationSound: true,
+	notificationSoundAlways: false,
+	showUpdateToast: false,
+	showChangelog: false,
+	showEmojiInCall: false,
+	voiceInterruption: false,
+	hapticFeedback: true,
+	richTextInput: true,
+	promptAutocomplete: true,
+	largeTextAsFile: true,
+	copyFormatted: false,
+	collapseCodeBlocks: false,
+	expandDetails: false,
+	imageCompression: false,
+	imageCompressionSize: { width: '', height: '' },
+	stylizedPdfExport: true,
+	ctrlEnterToSend: false,
+	iframeSandboxAllowSameOrigin: false,
+	iframeSandboxAllowForms: false,
+	backgroundImageUrl: "https://images.pexels.com/photos/772429/pexels-photo-772429.jpeg?_gl=1*xzpfvm*_ga*MjU4MTg2MDU4LjE3NTI3MDA5MDI.*_ga_8JE65Q40S6*czE3NTI3MDgzNzMkbzIkZzEkdDE3NTI3MDg0MzkkajYwJGwwJGgw",
+	
+	// Paramètres d'addons
+	titleAutoGenerate: true,
+	autoFollowUps: true,
+	autoTags: true,
+	responseAutoCopy: false,
+	userLocation: false,
+	detectArtifacts: true,
+	
+	// Paramètres de recherche web
+	webSearch: null,
+	
+	// Paramètres de modèle par défaut
+	models: [],
+	
+	// Paramètres avancés
+	params: {
+		stream_response: true,
+		function_calling: null,
+		seed: null,
+		temperature: null,
+		reasoning_effort: null,
+		logit_bias: null,
+		frequency_penalty: null,
+		presence_penalty: null,
+		repeat_penalty: null,
+		repeat_last_n: null,
+		mirostat: null,
+		mirostat_eta: null,
+		mirostat_tau: null,
+		top_k: null,
+		top_p: null,
+		min_p: null,
+		stop: null,
+		tfs_z: null,
+		num_ctx: null,
+		num_batch: null,
+		num_keep: null,
+		max_tokens: null,
+		num_gpu: null
+	}
+};
+
+export const settings: Writable<Settings> = writable(defaultSettings);
 
 export const showSidebar = writable(false);
 export const showSearch = writable(false);
@@ -158,6 +232,77 @@ type Settings = {
 	num_batch?: string;
 	num_keep?: string;
 	options?: ModelOptions;
+	
+	// Paramètres d'interface supplémentaires
+	landingPageMode?: string;
+	chatBubble?: boolean;
+	widescreenMode?: boolean;
+	splitLargeChunks?: boolean;
+	scrollOnBranchChange?: boolean;
+	notificationSound?: boolean;
+	notificationSoundAlways?: boolean;
+	showUpdateToast?: boolean;
+	showChangelog?: boolean;
+	showEmojiInCall?: boolean;
+	voiceInterruption?: boolean;
+	hapticFeedback?: boolean;
+	richTextInput?: boolean;
+	promptAutocomplete?: boolean;
+	largeTextAsFile?: boolean;
+	copyFormatted?: boolean;
+	collapseCodeBlocks?: boolean;
+	expandDetails?: boolean;
+	imageCompression?: boolean;
+	imageCompressionSize?: { width: string; height: string };
+	stylizedPdfExport?: boolean;
+	iframeSandboxAllowSameOrigin?: boolean;
+	iframeSandboxAllowForms?: boolean;
+	backgroundImageUrl?: string | null;
+	
+	// Paramètres d'addons
+	titleAutoGenerate?: boolean;
+	autoFollowUps?: boolean;
+	autoTags?: boolean;
+	responseAutoCopy?: boolean;
+	userLocation?: boolean;
+	detectArtifacts?: boolean;
+	
+	// Paramètres de recherche web
+	webSearch?: string | null;
+	
+	// Paramètres avancés
+	params?: {
+		stream_response?: boolean | null;
+		function_calling?: boolean | null;
+		seed?: number | null;
+		temperature?: number | null;
+		reasoning_effort?: number | null;
+		logit_bias?: string | null;
+		frequency_penalty?: number | null;
+		presence_penalty?: number | null;
+		repeat_penalty?: number | null;
+		repeat_last_n?: number | null;
+		mirostat?: number | null;
+		mirostat_eta?: number | null;
+		mirostat_tau?: number | null;
+		top_k?: number | null;
+		top_p?: number | null;
+		min_p?: number | null;
+		stop?: string[] | null;
+		tfs_z?: number | null;
+		num_ctx?: number | null;
+		num_batch?: number | null;
+		num_keep?: number | null;
+		max_tokens?: number | null;
+		num_gpu?: number | null;
+		use_mmap?: boolean | null;
+		use_mlock?: boolean | null;
+		num_thread?: number | null;
+		think?: boolean | null;
+		keep_alive?: string | null;
+		format?: string | null;
+		custom_params?: Record<string, any>;
+	};
 };
 
 type ModelOptions = {

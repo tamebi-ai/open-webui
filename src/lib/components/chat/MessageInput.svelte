@@ -1199,74 +1199,76 @@
 
 								<div class=" flex justify-between mt-0.5 mb-2.5 mx-0.5 max-w-full" dir="ltr">
 									<div class="ml-1 self-end flex items-center flex-1 max-w-[80%]">
-										<InputMenu
-											bind:selectedToolIds
-											selectedModels={atSelectedModel ? [atSelectedModel.id] : selectedModels}
-											{fileUploadCapableModels}
-											{screenCaptureHandler}
-											{inputFilesHandler}
-											uploadFilesHandler={() => {
-												filesInputElement.click();
-											}}
-											uploadGoogleDriveHandler={async () => {
-												try {
-													const fileData = await createPicker();
-													if (fileData) {
-														const file = new File([fileData.blob], fileData.name, {
-															type: fileData.blob.type
-														});
-														await uploadFileHandler(file);
-													} else {
-														console.log('No file was selected from Google Drive');
+										{#if $_user?.role === 'admin'}
+											<InputMenu
+												bind:selectedToolIds
+												selectedModels={atSelectedModel ? [atSelectedModel.id] : selectedModels}
+												{fileUploadCapableModels}
+												{screenCaptureHandler}
+												{inputFilesHandler}
+												uploadFilesHandler={() => {
+													filesInputElement.click();
+												}}
+												uploadGoogleDriveHandler={async () => {
+													try {
+														const fileData = await createPicker();
+														if (fileData) {
+															const file = new File([fileData.blob], fileData.name, {
+																type: fileData.blob.type
+															});
+															await uploadFileHandler(file);
+														} else {
+															console.log('No file was selected from Google Drive');
+														}
+													} catch (error) {
+														console.error('Google Drive Error:', error);
+														toast.error(
+															$i18n.t('Error accessing Google Drive: {{error}}', {
+																error: error.message
+															})
+														);
 													}
-												} catch (error) {
-													console.error('Google Drive Error:', error);
-													toast.error(
-														$i18n.t('Error accessing Google Drive: {{error}}', {
-															error: error.message
-														})
-													);
-												}
-											}}
-											uploadOneDriveHandler={async (authorityType) => {
-												try {
-													const fileData = await pickAndDownloadFile(authorityType);
-													if (fileData) {
-														const file = new File([fileData.blob], fileData.name, {
-															type: fileData.blob.type || 'application/octet-stream'
-														});
-														await uploadFileHandler(file);
-													} else {
-														console.log('No file was selected from OneDrive');
+												}}
+												uploadOneDriveHandler={async (authorityType) => {
+													try {
+														const fileData = await pickAndDownloadFile(authorityType);
+														if (fileData) {
+															const file = new File([fileData.blob], fileData.name, {
+																type: fileData.blob.type || 'application/octet-stream'
+															});
+															await uploadFileHandler(file);
+														} else {
+															console.log('No file was selected from OneDrive');
+														}
+													} catch (error) {
+														console.error('OneDrive Error:', error);
 													}
-												} catch (error) {
-													console.error('OneDrive Error:', error);
-												}
-											}}
-											onClose={async () => {
-												await tick();
+												}}
+												onClose={async () => {
+													await tick();
 
-												const chatInput = document.getElementById('chat-input');
-												chatInput?.focus();
-											}}
-										>
-											<button
-												class="bg-transparent hover:bg-gray-100 text-gray-800 dark:text-white dark:hover:bg-gray-800 transition rounded-full p-1.5 outline-hidden focus:outline-hidden"
-												type="button"
-												aria-label="More"
+													const chatInput = document.getElementById('chat-input');
+													chatInput?.focus();
+												}}
 											>
-												<svg
-													xmlns="http://www.w3.org/2000/svg"
-													viewBox="0 0 20 20"
-													fill="currentColor"
-													class="size-5"
+												<button
+													class="bg-transparent hover:bg-gray-100 text-gray-800 dark:text-white dark:hover:bg-gray-800 transition rounded-full p-1.5 outline-hidden focus:outline-hidden"
+													type="button"
+													aria-label="More"
 												>
-													<path
-														d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z"
-													/>
-												</svg>
-											</button>
-										</InputMenu>
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														viewBox="0 0 20 20"
+														fill="currentColor"
+														class="size-5"
+													>
+														<path
+															d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z"
+														/>
+													</svg>
+												</button>
+											</InputMenu>
+										{/if}
 
 										{#if $_user && (showToolsButton || (toggleFilters && toggleFilters.length > 0) || showWebSearchButton || showImageGenerationButton || showCodeInterpreterButton)}
 											<div
@@ -1399,7 +1401,7 @@
 									</div>
 
 									<div class="self-end flex space-x-1 mr-1 shrink-0">
-										{#if (!history?.currentId || history.messages[history.currentId]?.done == true) && ($_user?.role === 'admin' || ($_user?.permissions?.chat?.stt ?? true))}
+										{#if (!history?.currentId || history.messages[history.currentId]?.done == true) && $_user?.role === 'admin'}
 											<!-- {$i18n.t('Record voice')} -->
 											<Tooltip content={$i18n.t('Dictate')}>
 												<button

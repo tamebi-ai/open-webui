@@ -115,7 +115,7 @@
 							</div>
 						</button>
 					</Menu>
-				{:else if $mobile}
+				{:else if $mobile && $user?.role === 'admin'}
 					<Tooltip content={$i18n.t('Controls')}>
 						<button
 							class=" flex cursor-pointer px-2 py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-850 transition"
@@ -131,7 +131,7 @@
 					</Tooltip>
 				{/if}
 
-				{#if !$mobile}
+				{#if !$mobile && $user?.role === 'admin'}
 					<Tooltip content={$i18n.t('Controls')}>
 						<button
 							class=" flex cursor-pointer px-2 py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-850 transition"

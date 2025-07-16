@@ -30,7 +30,7 @@
 		keywords: string[];
 	}
 
-	const searchData: SettingsTab[] = [
+	const allSearchData: SettingsTab[] = [
 		{
 			id: 'general',
 			title: 'General',
@@ -465,6 +465,17 @@
 			]
 		}
 	];
+
+	// Filtrer les onglets à masquer (seulement pour les utilisateurs non-admin)
+	const searchData = allSearchData.filter(tab => {
+		const hiddenTabs = ['connections', 'audio', 'about', 'interface'];
+		// Si c'est un admin, on ne masque aucun onglet
+		if ($user?.role === 'admin') {
+			return true;
+		}
+		// Sinon, on masque les onglets spécifiés
+		return !hiddenTabs.includes(tab.id);
+	});
 
 	let search = '';
 	let visibleTabs = searchData.map((tab) => tab.id);

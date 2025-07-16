@@ -142,7 +142,7 @@
 				</button>
 			{/if}
 
-			{#if help}
+			{#if help && $user?.role === 'admin'}
 				<hr class=" border-gray-100 dark:border-gray-800 my-1 p-0" />
 
 				<!-- {$i18n.t('Help')} -->
