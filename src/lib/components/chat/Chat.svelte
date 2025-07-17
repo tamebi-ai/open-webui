@@ -36,7 +36,8 @@
 		chatTitle,
 		showArtifacts,
 		tools,
-		toolServers
+		toolServers,
+		defaultSettings
 	} from '$lib/stores';
 	import {
 		convertMessagesToHistory,
@@ -50,7 +51,8 @@
 		removeDetails,
 		getPromptVariables,
 		processDetails,
-		removeAllDetails
+		removeAllDetails,
+		deepMerge
 	} from '$lib/utils';
 
 	import { generateChatCompletion } from '$lib/apis/ollama';
@@ -899,9 +901,17 @@
 				const userSettings = await getUserSettings(localStorage.token);
 
 				if (userSettings) {
-					await settings.set(userSettings.ui);
+					await settings.set(deepMerge(defaultSettings, userSettings.ui));
 				} else {
-					await settings.set(JSON.parse(localStorage.getItem('settings') ?? '{}'));
+					let localStorageSettings = {};
+					try {
+						localStorageSettings = JSON.parse(localStorage.getItem('settings') ?? '{}');
+					} catch (e) {}
+					if (Object.keys(localStorageSettings).length === 0) {
+						settings.set(defaultSettings);
+					} else {
+						settings.set(deepMerge(defaultSettings, localStorageSettings));
+					}
 				}
 
 				params = chatContent?.params ?? {};

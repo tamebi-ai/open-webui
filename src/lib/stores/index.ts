@@ -136,6 +136,8 @@ const defaultSettings: Settings = {
 	}
 };
 
+export { defaultSettings };
+
 export const settings: Writable<Settings> = writable(defaultSettings);
 
 export const showSidebar = writable(false);

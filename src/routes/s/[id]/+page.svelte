@@ -5,8 +5,8 @@
 
 	import dayjs from 'dayjs';
 
-	import { settings, chatId, WEBUI_NAME, models, config } from '$lib/stores';
-	import { convertMessagesToHistory, createMessagesList } from '$lib/utils';
+	import { settings, chatId, WEBUI_NAME, models, config, defaultSettings } from '$lib/stores';
+	import { convertMessagesToHistory, createMessagesList, deepMerge } from '$lib/utils';
 
 	import { getChatByShareId, cloneSharedChatById } from '$lib/apis/chats';
 
@@ -67,17 +67,19 @@
 		});
 
 		if (userSettings) {
-			settings.set(userSettings.ui);
+			settings.set(deepMerge(defaultSettings, userSettings.ui));
 		} else {
-			let localStorageSettings = {} as Parameters<(typeof settings)['set']>[0];
-
+			let localStorageSettings = {};
 			try {
 				localStorageSettings = JSON.parse(localStorage.getItem('settings') ?? '{}');
-			} catch (e: unknown) {
+			} catch (e) {
 				console.error('Failed to parse settings from localStorage', e);
 			}
-
-			settings.set(localStorageSettings);
+			if (Object.keys(localStorageSettings).length === 0) {
+				settings.set(defaultSettings);
+			} else {
+				settings.set(deepMerge(defaultSettings, localStorageSettings));
+			}
 		}
 
 		await models.set(

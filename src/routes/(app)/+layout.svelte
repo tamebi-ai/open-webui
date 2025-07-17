@@ -21,6 +21,8 @@
 
 	import { WEBUI_VERSION } from '$lib/constants';
 	import { compareVersion } from '$lib/utils';
+	import { defaultSettings } from '$lib/stores';
+	import { deepMerge } from '$lib/utils';
 
 	import {
 		config,
@@ -92,7 +94,7 @@
 			});
 
 			if (userSettings) {
-				settings.set(userSettings.ui);
+				settings.set(deepMerge(defaultSettings, userSettings.ui));
 			} else {
 				let localStorageSettings = {} as Parameters<(typeof settings)['set']>[0];
 
@@ -102,7 +104,11 @@
 					console.error('Failed to parse settings from localStorage', e);
 				}
 
-				settings.set(localStorageSettings);
+				if (Object.keys(localStorageSettings).length === 0) {
+					settings.set(defaultSettings);
+				} else {
+					settings.set(deepMerge(defaultSettings, localStorageSettings));
+				}
 			}
 
 			models.set(

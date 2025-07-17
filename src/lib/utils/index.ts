@@ -1389,3 +1389,20 @@ export const slugify = (str: string): string => {
 			.toLowerCase()
 	);
 };
+
+// Fusion profonde pour appliquer les valeurs par défaut à tous les utilisateurs
+export function deepMerge(target, source) {
+  const output = { ...target };
+  for (const key in source) {
+    if (
+      source[key] &&
+      typeof source[key] === 'object' &&
+      !Array.isArray(source[key])
+    ) {
+      output[key] = deepMerge(target[key] || {}, source[key]);
+    } else {
+      output[key] = source[key];
+    }
+  }
+  return output;
+}
