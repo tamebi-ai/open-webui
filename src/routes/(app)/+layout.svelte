@@ -61,6 +61,9 @@
 		if ($user === undefined || $user === null) {
 			await goto('/auth');
 		} else if (['user', 'admin'].includes($user?.role)) {
+			settings.set(defaultSettings);
+			// (optionnel) Tu peux aussi mettre à jour le backend ici si tu veux
+
 			try {
 				// Check if IndexedDB exists
 				DB = await openDB('Chats', 1);
@@ -94,21 +97,21 @@
 			});
 
 			if (userSettings) {
-				settings.set(deepMerge(defaultSettings, userSettings.ui));
+				// settings.set(deepMerge(defaultSettings, userSettings.ui)); // Removed as per edit hint
 			} else {
-				let localStorageSettings = {} as Parameters<(typeof settings)['set']>[0];
+				// let localStorageSettings = {} as Parameters<(typeof settings)['set']>[0]; // Removed as per edit hint
 
-				try {
-					localStorageSettings = JSON.parse(localStorage.getItem('settings') ?? '{}');
-				} catch (e: unknown) {
-					console.error('Failed to parse settings from localStorage', e);
-				}
+				// try {
+				// 	localStorageSettings = JSON.parse(localStorage.getItem('settings') ?? '{}');
+				// } catch (e: unknown) {
+				// 	console.error('Failed to parse settings from localStorage', e);
+				// }
 
-				if (Object.keys(localStorageSettings).length === 0) {
-					settings.set(defaultSettings);
-				} else {
-					settings.set(deepMerge(defaultSettings, localStorageSettings));
-				}
+				// if (Object.keys(localStorageSettings).length === 0) {
+				// 	settings.set(defaultSettings);
+				// } else {
+				// 	settings.set(deepMerge(defaultSettings, localStorageSettings));
+				// }
 			}
 
 			models.set(

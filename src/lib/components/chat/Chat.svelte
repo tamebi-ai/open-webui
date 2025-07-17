@@ -859,6 +859,7 @@
 	};
 
 	const loadChat = async () => {
+		settings.set(defaultSettings);
 		chatId.set(chatIdProp);
 
 		if ($temporaryChatEnabled) {

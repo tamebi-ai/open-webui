@@ -61,26 +61,7 @@
 	//////////////////////////
 
 	const loadSharedChat = async () => {
-		const userSettings = await getUserSettings(localStorage.token).catch((error) => {
-			console.error(error);
-			return null;
-		});
-
-		if (userSettings) {
-			settings.set(deepMerge(defaultSettings, userSettings.ui));
-		} else {
-			let localStorageSettings = {};
-			try {
-				localStorageSettings = JSON.parse(localStorage.getItem('settings') ?? '{}');
-			} catch (e) {
-				console.error('Failed to parse settings from localStorage', e);
-			}
-			if (Object.keys(localStorageSettings).length === 0) {
-				settings.set(defaultSettings);
-			} else {
-				settings.set(deepMerge(defaultSettings, localStorageSettings));
-			}
-		}
+		settings.set(defaultSettings);
 
 		await models.set(
 			await getModels(
