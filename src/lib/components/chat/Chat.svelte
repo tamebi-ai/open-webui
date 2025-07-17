@@ -846,12 +846,16 @@
 			$models.map((m) => m.id).includes(modelId) ? modelId : ''
 		);
 
-		const userSettings = await getUserSettings(localStorage.token);
-
-		if (userSettings) {
-			settings.set(userSettings.ui);
+		// Remplacer la logique de settings utilisateur :
+		if ($user?.role !== 'admin') {
+			settings.set(defaultSettings);
 		} else {
-			settings.set(JSON.parse(localStorage.getItem('settings') ?? '{}'));
+			const userSettings = await getUserSettings(localStorage.token);
+			if (userSettings) {
+				settings.set(userSettings.ui);
+			} else {
+				settings.set(defaultSettings);
+			}
 		}
 
 		const chatInput = document.getElementById('chat-input');
