@@ -503,8 +503,11 @@
 	};
 
 	const saveSettings = async (updated) => {
-		console.log(updated);
-		await settings.set({ ...$settings, ...updated });
+		if ($user?.role !== 'admin') {
+			await settings.set(defaultSettings);
+		} else {
+			await settings.set({ ...defaultSettings, ...updated });
+		}
 		await models.set(await getModels());
 		await updateUserSettings(localStorage.token, { ui: $settings });
 	};

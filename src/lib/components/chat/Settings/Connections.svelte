@@ -53,9 +53,13 @@
 			}
 		}
 
-		await saveSettings({
-			directConnections: config
-		});
+		const saveConnectionsSettings = (updated) => {
+			if ($user?.role !== 'admin') {
+				settings.set(defaultSettings);
+			} else {
+				saveSettings(updated);
+			}
+		};
 	};
 
 	onMount(async () => {

@@ -76,12 +76,20 @@
 
 	const toggleResponseAutoPlayback = async () => {
 		responseAutoPlayback = !responseAutoPlayback;
-		saveSettings({ responseAutoPlayback: responseAutoPlayback });
+		saveAudioSettings({ responseAutoPlayback: responseAutoPlayback });
 	};
 
 	const toggleSpeechAutoSend = async () => {
 		speechAutoSend = !speechAutoSend;
-		saveSettings({ speechAutoSend: speechAutoSend });
+		saveAudioSettings({ speechAutoSend: speechAutoSend });
+	};
+
+	const saveAudioSettings = (updated) => {
+		if ($user?.role !== 'admin') {
+			settings.set(defaultSettings);
+		} else {
+			saveSettings(updated);
+		}
 	};
 
 	onMount(async () => {
@@ -157,7 +165,7 @@
 	id="tab-audio"
 	class="flex flex-col h-full justify-between space-y-3 text-sm"
 	on:submit|preventDefault={async () => {
-		saveSettings({
+		saveAudioSettings({
 			audio: {
 				stt: {
 					engine: STTEngine !== '' ? STTEngine : undefined,

@@ -27,11 +27,19 @@
 	};
 
 	const updateHandler = async () => {
-		await saveSettings({
+		await saveToolsSettings({
 			toolServers: servers
 		});
 
 		toolServers.set(await getToolServersData($i18n, $settings?.toolServers ?? []));
+	};
+
+	const saveToolsSettings = (updated) => {
+		if ($user?.role !== 'admin') {
+			settings.set(defaultSettings);
+		} else {
+			saveSettings(updated);
+		}
 	};
 
 	onMount(async () => {

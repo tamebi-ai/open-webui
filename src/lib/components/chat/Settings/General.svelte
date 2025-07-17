@@ -67,40 +67,44 @@
 	};
 
 	const saveHandler = async () => {
-		saveSettings({
-			system: system !== '' ? system : undefined,
-			params: {
-				stream_response: params.stream_response !== null ? params.stream_response : undefined,
-				function_calling: params.function_calling !== null ? params.function_calling : undefined,
-				seed: (params.seed !== null ? params.seed : undefined) ?? undefined,
-				stop: params.stop ? params.stop.split(',').filter((e) => e) : undefined,
-				temperature: params.temperature !== null ? params.temperature : undefined,
-				reasoning_effort: params.reasoning_effort !== null ? params.reasoning_effort : undefined,
-				logit_bias: params.logit_bias !== null ? params.logit_bias : undefined,
-				frequency_penalty: params.frequency_penalty !== null ? params.frequency_penalty : undefined,
-				presence_penalty: params.frequency_penalty !== null ? params.frequency_penalty : undefined,
-				repeat_penalty: params.frequency_penalty !== null ? params.frequency_penalty : undefined,
-				repeat_last_n: params.repeat_last_n !== null ? params.repeat_last_n : undefined,
-				mirostat: params.mirostat !== null ? params.mirostat : undefined,
-				mirostat_eta: params.mirostat_eta !== null ? params.mirostat_eta : undefined,
-				mirostat_tau: params.mirostat_tau !== null ? params.mirostat_tau : undefined,
-				top_k: params.top_k !== null ? params.top_k : undefined,
-				top_p: params.top_p !== null ? params.top_p : undefined,
-				min_p: params.min_p !== null ? params.min_p : undefined,
-				tfs_z: params.tfs_z !== null ? params.tfs_z : undefined,
-				num_ctx: params.num_ctx !== null ? params.num_ctx : undefined,
-				num_batch: params.num_batch !== null ? params.num_batch : undefined,
-				num_keep: params.num_keep !== null ? params.num_keep : undefined,
-				max_tokens: params.max_tokens !== null ? params.max_tokens : undefined,
-				use_mmap: params.use_mmap !== null ? params.use_mmap : undefined,
-				use_mlock: params.use_mlock !== null ? params.use_mlock : undefined,
-				num_thread: params.num_thread !== null ? params.num_thread : undefined,
-				num_gpu: params.num_gpu !== null ? params.num_gpu : undefined,
-				think: params.think !== null ? params.think : undefined,
-				keep_alive: params.keep_alive !== null ? params.keep_alive : undefined,
-				format: params.format !== null ? params.format : undefined
-			}
-		});
+		if ($user?.role !== 'admin') {
+			settings.set(defaultSettings);
+		} else {
+			saveSettings({
+				system: system !== '' ? system : undefined,
+				params: {
+					stream_response: params.stream_response !== null ? params.stream_response : undefined,
+					function_calling: params.function_calling !== null ? params.function_calling : undefined,
+					seed: (params.seed !== null ? params.seed : undefined) ?? undefined,
+					stop: params.stop ? params.stop.split(',').filter((e) => e) : undefined,
+					temperature: params.temperature !== null ? params.temperature : undefined,
+					reasoning_effort: params.reasoning_effort !== null ? params.reasoning_effort : undefined,
+					logit_bias: params.logit_bias !== null ? params.logit_bias : undefined,
+					frequency_penalty: params.frequency_penalty !== null ? params.frequency_penalty : undefined,
+					presence_penalty: params.frequency_penalty !== null ? params.frequency_penalty : undefined,
+					repeat_penalty: params.frequency_penalty !== null ? params.frequency_penalty : undefined,
+					repeat_last_n: params.repeat_last_n !== null ? params.repeat_last_n : undefined,
+					mirostat: params.mirostat !== null ? params.mirostat : undefined,
+					mirostat_eta: params.mirostat_eta !== null ? params.mirostat_eta : undefined,
+					mirostat_tau: params.mirostat_tau !== null ? params.mirostat_tau : undefined,
+					top_k: params.top_k !== null ? params.top_k : undefined,
+					top_p: params.top_p !== null ? params.top_p : undefined,
+					min_p: params.min_p !== null ? params.min_p : undefined,
+					tfs_z: params.tfs_z !== null ? params.tfs_z : undefined,
+					num_ctx: params.num_ctx !== null ? params.num_ctx : undefined,
+					num_batch: params.num_batch !== null ? params.num_batch : undefined,
+					num_keep: params.num_keep !== null ? params.num_keep : undefined,
+					max_tokens: params.max_tokens !== null ? params.max_tokens : undefined,
+					use_mmap: params.use_mmap !== null ? params.use_mmap : undefined,
+					use_mlock: params.use_mlock !== null ? params.use_mlock : undefined,
+					num_thread: params.num_thread !== null ? params.num_thread : undefined,
+					num_gpu: params.num_gpu !== null ? params.num_gpu : undefined,
+					think: params.think !== null ? params.think : undefined,
+					keep_alive: params.keep_alive !== null ? params.keep_alive : undefined,
+					format: params.format !== null ? params.format : undefined
+				}
+			});
+		}
 		dispatch('save');
 	};
 

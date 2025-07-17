@@ -38,7 +38,7 @@
 		}
 
 		if (webhookUrl !== $settings?.notifications?.webhook_url) {
-			saveSettings({
+			saveAccountSettings({
 				notifications: {
 					...$settings.notifications,
 					webhook_url: webhookUrl
@@ -71,6 +71,14 @@
 			toast.success($i18n.t('API Key created.'));
 		} else {
 			toast.error($i18n.t('Failed to create API Key.'));
+		}
+	};
+
+	const saveAccountSettings = (updated) => {
+		if ($user?.role !== 'admin') {
+			settings.set(defaultSettings);
+		} else {
+			saveSettings(updated);
 		}
 	};
 

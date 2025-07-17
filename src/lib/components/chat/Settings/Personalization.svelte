@@ -19,6 +19,14 @@
 	onMount(async () => {
 		enableMemory = $settings?.memory ?? false;
 	});
+
+	const savePersonalizationSettings = (updated) => {
+		if ($user?.role !== 'admin') {
+			settings.set(defaultSettings);
+		} else {
+			saveSettings(updated);
+		}
+	};
 </script>
 
 <ManageModal bind:show={showManageModal} />
@@ -49,7 +57,7 @@
 					<Switch
 						bind:state={enableMemory}
 						on:change={async () => {
-							saveSettings({ memory: enableMemory });
+							savePersonalizationSettings({ memory: enableMemory });
 						}}
 					/>
 				</div>
